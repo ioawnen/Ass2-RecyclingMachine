@@ -1,0 +1,23 @@
+package com.perisic.beds;
+
+import java.util.*;
+
+import javax.swing.JOptionPane;
+
+import org.apache.xmlrpc.*;
+
+public class RecyclingClient {
+ public static void main (String [] args) {
+  try {
+   
+   XmlRpcClient server = new XmlRpcClient("http://10.1.26.211/RPC2"); //
+   
+   Object result = server.execute("recycling.numberOfItems", new Vector() );   
+   System.out.println("The result is: "+result.toString());
+   
+  
+  } catch (Exception exception) {
+   System.err.println("JavaClient: " + exception);
+   }
+  }
+}

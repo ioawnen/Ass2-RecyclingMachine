@@ -1,0 +1,162 @@
+package com.perisic.beds;
+//import GreenDisplay;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import com.perisic.beds.CustomerPanel;
+import javax.swing.*;
+
+import org.apache.xmlrpc.WebServer;
+/**
+ * A Simple Graphical User Interface for the Recycling Machine.
+ * Each 'slot' is used for a different type of item
+ * @author Jake Scott
+ *
+ */
+public class RecyclingGUI extends JFrame implements ActionListener  {
+	
+	public static boolean green = false; //initially text is pink, not green
+	
+
+	private static final long serialVersionUID = -8505887234678184162L; //id required
+
+	CustomerPanel myCustomerPanel = new CustomerPanel( new Display());  //display window constructed
+	JLabel status = new JLabel(); //status label
+	
+	/**
+	 * Defines what happens when a button is pressed.
+	 */
+	public void actionPerformed(ActionEvent e) {
+
+	
+		if (e.getSource().equals(slot1)) {  //if slot 1 is pressed, a can is added to the machine
+			if (capacity != 0){ //if the machine is not full
+			myCustomerPanel.itemReceived(1);
+			capacity--;
+			status.setText("Can Inserted. " + capacity + " spaces remaining.");
+			} else
+			{
+				status.setText("The machine is full");
+			}
+		} else if (e.getSource().equals(slot2)) {
+			if (capacity != 0){
+			myCustomerPanel.itemReceived(2);
+			capacity--;
+			status.setText("Bottle Inserted. " + capacity + " spaces remaining.");
+			} else
+			{
+				status.setText("The machine is full");
+			}
+		} else if (e.getSource().equals(slot3)) {
+			if (capacity != 0){
+			myCustomerPanel.itemReceived(3);
+			capacity--;
+			status.setText("Crate Inserted. " + capacity + " spaces remaining.");
+			} else
+			{
+				status.setText("The machine is full");
+			}
+		} else if (e.getSource().equals(slot4)) {
+			if (capacity != 0){
+			myCustomerPanel.itemReceived(4);
+			capacity--;
+			status.setText("Paper Bag Inserted. " + capacity + " spaces remaining.");
+			} else
+			{
+				status.setText("The machine is full");
+			}
+		} else if (e.getSource().equals(receipt)) { //receipt is output when this button is pressed
+			status.setText("");
+		myCustomerPanel.printReceipt(); //prints the receipt
+		} else if (e.getSource().equals(printer)) { //pressing the button changes text colour between pink and green
+			status.setText("");
+			changeDisplay(); 
+		} else if (e.getSource().equals(summary)) { //summary is output when this button is pressed
+			myCustomerPanel.printSummary();
+			status.setText("");
+		}
+	}
+	/*
+	 * Declaration of GUI elements
+	 */
+	JButton slot1 = new JButton("Slot 1"); 
+	JButton slot2 = new JButton("Slot 2"); 
+	JButton slot3 = new JButton("Slot 3"); 
+	JButton slot4 = new JButton("Slot 4");
+	JButton printer = new JButton("Change to Green Display");
+	JButton summary = new JButton("Summary");
+	JButton receipt = new JButton("Receipt"); 
+	
+	int capacity = 15;
+	/**
+	 * Describes the GUI for the machine
+	 */
+	public RecyclingGUI() {
+		super();
+		setTitle("Recycling Machine");
+		setSize(400, 150);
+		setLocation(500,450);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		JPanel panel = new JPanel(); 
+		panel.add(slot1); 
+		panel.add(slot2);
+		panel.add(slot3); 
+		panel.add(slot4);
+		
+		slot1.addActionListener(this); 
+		slot2.addActionListener(this); 
+		slot3.addActionListener(this); 
+		slot4.addActionListener(this);
+		
+		panel.add(receipt); 
+		receipt.addActionListener(this); 
+		printer.addActionListener(this);
+		panel.add(printer);
+		summary.addActionListener(this);
+		panel.add(summary);
+		panel.add(status);
+		
+		
+		
+		getContentPane().add(panel);
+		panel.repaint();
+	
+	}
+	/*
+	 * Creates GUI, which will be visible upon creation
+	 */
+	public static void main(String [] args ) { 
+		RecyclingGUI myGUI = new RecyclingGUI(); 
+		myGUI.setVisible(true); 
+		try {
+			   System.out.println("Starting the Recycling Server..."); 
+			   WebServer server = new WebServer(81);
+			   server.addHandler("recycling", myGUI);
+			   server.start();
+			  } catch (Exception exception) {
+			   System.err.println("JavaServer: " + exception);
+			   }
+	}
+	/**
+	 * Used to change the colour of the text in the display window. Eventually passed to Display class.
+	 */
+	public void changeDisplay(){
+		if (green==false){ //if the text is not set to green, sets to green
+			green = true;
+			printer.setText("Change to Pink Display"); //text on button changed
+			myCustomerPanel.changeColour("GREEN");
+		} else {
+		green = false; //if it is currently green, the text is set to pink
+		printer.setText("Change to Green Display");
+		myCustomerPanel.changeColour("PINK");
+	}
+	}
+	public int numberOfItems() {
+		  return myCustomerPanel.getNumberOfItems();  
+		 }
+	public String summaryText() {
+		  return myCustomerPanel.getSummaryText(); 
+		 }
+}
+	
+
