@@ -25,6 +25,7 @@ public class Display extends JFrame implements com.perisic.beds.PrintInterface {
 		outputWindow.setForeground(Color.MAGENTA); 
 		getContentPane().add(outputWindow);
 		setVisible(true); 
+		//tfydrfydrydr
 		}
 	/** 
 	 * Prints the text str to the screen. Any previous text will be overwritten. 
