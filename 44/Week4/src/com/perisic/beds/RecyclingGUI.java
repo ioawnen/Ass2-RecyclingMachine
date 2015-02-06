@@ -19,9 +19,11 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	public static WebServer server = null;
 
 	private static final long serialVersionUID = -8505887234678184162L; //id required
+	private String storedPasswd = "password"; // needs some thinking with encryption etc
+	private String storedCookie = null; // some random string to be used for authentication
 
 	CustomerPanel myCustomerPanel = new CustomerPanel( new Display());  //display window constructed
-	JLabel status = new JLabel(); //status label
+	JLabel status = new JLabel(); //status 
 	
 	/**
 	 * Defines what happens when a button is pressed.
@@ -123,7 +125,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	
 	}
 	/*
-	 * Creates GUI, which will be visible upon creation
+	 * Shuts down the server connection when closed
 	 */
 	public static void attachShutDownHook(){  
 		  for(int i =0; i<10;i++){
@@ -136,6 +138,9 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		   }); 
 		  }
 	}
+	/*
+	 * Creates GUI, which will be visible upon creation
+	 */
 	public static void main(String [] args ) { 
 		
 		RecyclingGUI myGUI = new RecyclingGUI(); 
@@ -156,6 +161,38 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		
 	}
 	/**
+	 * Web service to authenticate the user with proper password. 
+	 * @param passwd
+	 * @return
+	 */
+	 public String login(String passwd) { 
+		
+		 if( passwd.equals(storedPasswd)) { 
+			 storedCookie = "MC"+Math.random(); 
+			 return storedCookie; 
+		 } else { 
+		 	 return "wrong password"; 
+		 	} 		 
+		 }
+	 /**
+	  * Web service to logout from the system. 
+	  */
+	 
+	public String logout(String myCookie ) { 
+		if( storedCookie == null ) { 
+			return "(no cookie set)"; 
+		} else if( myCookie.equals(storedCookie)) { 
+			storedCookie = null;  
+			return "cookie deleted: OK"; 
+		} 
+		else { 
+			return "could not delete anything; authentication missing"; 
+		}
+		
+	}
+	
+	
+	/**
 	 * Used to change the colour of the text in the display window. Eventually passed to Display class.
 	 */
 	public void changeDisplay(){
@@ -169,8 +206,15 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		myCustomerPanel.changeColour("PINK");
 	}
 	}
-	public int numberOfItems() {
-		  return myCustomerPanel.getNumberOfItems();  
+	public int numberOfItems(String myCookie) {
+		if( storedCookie == null ) { 
+			return -1; 
+		} else if( myCookie.equals(storedCookie)) { 
+			return myCustomerPanel.getNumberOfItems(); 
+		} 
+		else { 
+			return -1; 
+		}
 		 }
 	public String summaryText() {
 		  return myCustomerPanel.getSummaryText(); 

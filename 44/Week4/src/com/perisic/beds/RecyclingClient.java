@@ -11,9 +11,31 @@ public class RecyclingClient {
   try {
    
    XmlRpcClient server = new XmlRpcClient("http://localhost/RPC2"); //
+   String message; 
+   String sessionCookie = ""; 
+   boolean loginSuccess = false; 
+   while( loginSuccess == false && (message = JOptionPane.showInputDialog("Login please")) != null  ) { 
+	   Vector parms1 = new Vector();
+	   parms1.add(message); 
+	   Object result3 = server.execute("recycling.login", parms1); 
+	   String loginRequest = result3.toString(); 
+	  //  System.out.println("The result3 is: "+ loginRequest.toString()); 
+	   if(loginRequest.equals("wrong password")) { 
+		   System.out.println("Wrong Pasword. Try again!!!"); 
+	   } else { 
+		   sessionCookie = loginRequest; 
+		   loginSuccess = true; 
+	   }
+   }
+
+   System.out.println("You are now logged into the Recycling Machine!!!"); 
    
-   //Object result = server.execute("recycling.numberOfItems", new Vector() );   //Retrieves number of items
-   Object result = server.execute("recycling.summaryText", new Vector() );     //Gets summary statement
+   Vector params = new Vector(); 
+     
+   params.add(sessionCookie); 
+   
+   Object result = server.execute("recycling.numberOfItems", new Vector() );   //Retrieves number of items
+   //Object result = server.execute("recycling.summaryText", new Vector() );     //Gets summary statement
    
    System.out.println("The result is: "+result.toString()); //Prints result
    
