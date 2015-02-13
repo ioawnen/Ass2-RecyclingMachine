@@ -147,7 +147,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		myGUI.setVisible(true); 
 		try {
 			   System.out.println("Starting the Recycling Server..."); 
-			   server = new WebServer(80);
+			   server = new WebServer(1634);
 			   server.addHandler("recycling", myGUI);
 			   server.start();
 			   System.out.println("Server started successfully.");

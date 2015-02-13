@@ -29,7 +29,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	public void actionPerformed(ActionEvent e) {
 		try { 
-			XmlRpcClient server = new XmlRpcClient("http://localhost/RPC2");
+			XmlRpcClient server = new XmlRpcClient("http://10.100.21.255/RPC2");
 			if( e.getSource().equals(login) ) { 
 				String message; 
 
@@ -57,9 +57,21 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Sorry no authentication there."); 
 				} else { 
 					System.out.println("The result is: "+resultInt);
-				}
+				} 
 				
-			} else if( e.getSource().equals(logout)) { 
+			}
+			else if( e.getSource().equals(summary)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				Object result = server.execute("recycling.summaryText", params ); 
+				int resultInt = new Integer(result.toString()); 
+				if( resultInt == -1 ) { 
+					System.out.println("Sorry no authentication there."); 
+				} else { 
+					System.out.println("This is the summary statement: "+resultInt);
+				}
+			}
+			else if( e.getSource().equals(logout)) { 
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
 				Object result = server.execute("recycling.logout", params ); 
@@ -70,8 +82,9 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		}
 	}
 
-	JButton login = new JButton("Login"); 
-	JButton numberOfItems = new JButton("#Items"); 
+	JButton login = new JButton("Login to Machine"); 
+	JButton numberOfItems = new JButton("No. of Items"); 
+	JButton summary = new JButton("View Summary");
 	JButton logout = new JButton("Logout"); 
 	
 	
@@ -82,10 +95,12 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		JPanel panel = new JPanel(); 
 		panel.add(login); 
 		panel.add(numberOfItems);
+		panel.add(summary);
 		panel.add(logout); 
 		
 		login.addActionListener(this); 
 		numberOfItems.addActionListener(this); 
+		summary.addActionListener(this);
 		logout.addActionListener(this); 
 
 		
