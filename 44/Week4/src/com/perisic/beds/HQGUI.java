@@ -13,23 +13,24 @@ public class HQGUI extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
+		ClientGUI clientgui = new ClientGUI();
 		try {
 			System.out.println(e.getSource());
 			if( e.getSource().equals(mach1) ) {
-
-			}
-			
+				clientgui.startGUI("Cabbage");
+			}	
 			else if( e.getSource().equals(mach2) ) {
-				
+				clientgui.startGUI("Cabbage");
 			}			
 			else if( e.getSource().equals(mach3) ) {
-				
+				clientgui.startGUI("Cabbage");
 			}
 			else if( e.getSource().equals(mach4) ) {
-				
+				clientgui.startGUI("Cabbage");
 			}
 			else {
 				System.out.println("Well fuck.");
+				clientgui.dispose();
 			}
 		}
 		catch(Exception exception) {

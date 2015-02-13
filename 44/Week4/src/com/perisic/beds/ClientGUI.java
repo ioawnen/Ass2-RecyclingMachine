@@ -126,6 +126,15 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	}
 	
+	public boolean startGUI(String inputIP) {
+		
+		serverUrl = inputIP;
+		ClientGUI myGUI = new ClientGUI(); 
+		myGUI.setVisible(true); 
+			
+		return true;
+	}
+	
 	public static void main(String [] args ) { 
 	ClientGUI myGUI = new ClientGUI(); 
 		myGUI.setVisible(true); 
