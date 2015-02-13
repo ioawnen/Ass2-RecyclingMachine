@@ -17,7 +17,7 @@ public class HQGUI extends JFrame implements ActionListener {
 		try {
 			System.out.println(e.getSource());
 			if( e.getSource().equals(mach1) ) {
-				clientgui.startGUI("Cabbage");
+				clientgui.startGUI("http://localhost:3133/RPC2");
 			}	
 			else if( e.getSource().equals(mach2) ) {
 				clientgui.startGUI("Cabbage");

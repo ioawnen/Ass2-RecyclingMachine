@@ -27,6 +27,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	private static final long serialVersionUID = -5772727482959492839L;
 	private String sessionCookie = ""; 
 	private String serverUrl = "http://localhost:3133/RPC2";
+	private Display displayGui = new Display();
 	
 	public void actionPerformed(ActionEvent e) {
 		try { 
@@ -58,6 +59,12 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Sorry no authentication there."); 
 				} else { 
 					System.out.println("The result is: "+resultInt);
+					try {
+						displayGui.print(""+resultInt);
+					}
+					catch(Exception ex) {
+						System.out.println(ex);
+					}
 				} 
 				
 			}
@@ -70,6 +77,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Sorry no authentication there."); 
 				} else { 
 					System.out.println("This is the summary statement: "+resultString);
+					displayGui.print(resultString);
 				}
 			}
 			else if( e.getSource().equals(summary)) { 
@@ -81,6 +89,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Sorry no authentication there."); 
 				} else { 
 					System.out.println("This is the summary statement: "+resultString);
+					displayGui.print(resultString);
 				}
 			}
 			else if( e.getSource().equals(logout)) { 
@@ -122,8 +131,6 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		getContentPane().add(panel);
 		panel.repaint();
 		
-		
-	
 	}
 	
 	public boolean startGUI(String inputIP) {
