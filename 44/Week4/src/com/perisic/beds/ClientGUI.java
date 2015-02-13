@@ -128,11 +128,20 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	public boolean startGUI(String inputIP) {
 		
-		serverUrl = inputIP;
-		ClientGUI myGUI = new ClientGUI(); 
-		myGUI.setVisible(true); 
+		try {
+			serverUrl = inputIP;
+			ClientGUI mainGui = new ClientGUI(); 
+			mainGui.setVisible(true); 
 			
-		return true;
+			Display displayGui = new Display();
+			displayGui.setVisible(true);
+				
+			return true;
+		}
+		catch (Exception ex) {
+			System.err.println(ex);
+			return false;
+		}
 	}
 	
 	public static void main(String [] args ) { 
