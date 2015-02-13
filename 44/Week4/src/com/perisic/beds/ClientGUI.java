@@ -29,7 +29,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	public void actionPerformed(ActionEvent e) {
 		try { 
-			XmlRpcClient server = new XmlRpcClient("http://10.100.21.255/RPC2");
+			XmlRpcClient server = new XmlRpcClient("http://localhost:3133/RPC2"); //We will be sticking with port 3133
 			if( e.getSource().equals(login) ) { 
 				String message; 
 
@@ -64,11 +64,11 @@ public class ClientGUI extends JFrame implements ActionListener  {
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
 				Object result = server.execute("recycling.summaryText", params ); 
-				int resultInt = new Integer(result.toString()); 
-				if( resultInt == -1 ) { 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
 					System.out.println("Sorry no authentication there."); 
 				} else { 
-					System.out.println("This is the summary statement: "+resultInt);
+					System.out.println("This is the summary statement: "+resultString);
 				}
 			}
 			else if( e.getSource().equals(logout)) { 

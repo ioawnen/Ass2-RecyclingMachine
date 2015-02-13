@@ -147,7 +147,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		myGUI.setVisible(true); 
 		try {
 			   System.out.println("Starting the Recycling Server..."); 
-			   server = new WebServer(1634);
+			   server = new WebServer(3133);
 			   server.addHandler("recycling", myGUI);
 			   server.start();
 			   System.out.println("Server started successfully.");
@@ -216,8 +216,16 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 			return -1; 
 		}
 		 }
-	public String summaryText() {
-		  return myCustomerPanel.getSummaryText(); 
+	public String summaryText(String myCookie) {
+		if( storedCookie == null ) { 
+			return "-1"; 
+		} else if( myCookie.equals(storedCookie)) { 
+			  return myCustomerPanel.getSummaryText();  
+		} 
+		else { 
+			return "-1"; 
+		}
+
 		 }
 	
 	
