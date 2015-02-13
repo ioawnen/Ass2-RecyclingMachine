@@ -99,5 +99,8 @@ public class DepositItemReceiver {
 	public String getSummaryText() {
 		return summ.summary();
 	}
+	public String getReceiptText() {
+		return theReceiptBasis.computeSum();
+	}
 	}
 

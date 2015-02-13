@@ -43,4 +43,7 @@ public class CustomerPanel {
 	public String getSummaryText() { 
 		return receiver.getSummaryText(); 
 	}
+	public String getReceiptText() { 
+		return receiver.getReceiptText(); 
+	}
 }

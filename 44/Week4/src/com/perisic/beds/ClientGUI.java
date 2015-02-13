@@ -60,6 +60,17 @@ public class ClientGUI extends JFrame implements ActionListener  {
 				} 
 				
 			}
+			else if( e.getSource().equals(receipt)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				Object result = server.execute("recycling.summaryText", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} else { 
+					System.out.println("This is the summary statement: "+resultString);
+				}
+			}
 			else if( e.getSource().equals(summary)) { 
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
@@ -84,6 +95,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 
 	JButton login = new JButton("Login to Machine"); 
 	JButton numberOfItems = new JButton("No. of Items"); 
+	JButton receipt = new JButton("View Receipt");
 	JButton summary = new JButton("View Summary");
 	JButton logout = new JButton("Logout"); 
 	
@@ -95,11 +107,13 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		JPanel panel = new JPanel(); 
 		panel.add(login); 
 		panel.add(numberOfItems);
+		panel.add(receipt);
 		panel.add(summary);
 		panel.add(logout); 
 		
 		login.addActionListener(this); 
 		numberOfItems.addActionListener(this); 
+		receipt.addActionListener(this);
 		summary.addActionListener(this);
 		logout.addActionListener(this); 
 

@@ -139,7 +139,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		  }
 	}
 	/*
-	 * Creates GUI, which will be visible upon creation
+	 * Creates GUI, which will be visible upon creation mft
 	 */
 	public static void main(String [] args ) { 
 		
@@ -221,6 +221,17 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 			return "-1"; 
 		} else if( myCookie.equals(storedCookie)) { 
 			  return myCustomerPanel.getSummaryText();  
+		} 
+		else { 
+			return "-1"; 
+		}
+
+		 }
+	public String receiptText(String myCookie) {
+		if( storedCookie == null ) { 
+			return "-1"; 
+		} else if( myCookie.equals(storedCookie)) { 
+			  return myCustomerPanel.getReceiptText();  
 		} 
 		else { 
 			return "-1"; 
