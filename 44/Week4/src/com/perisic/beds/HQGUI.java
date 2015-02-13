@@ -7,9 +7,37 @@ import javax.swing.*;
 
 import org.apache.xmlrpc.WebServer;
 
-public class HQGUI extends JFrame {
+public class HQGUI extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = -8505887234675184162L; //id required
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		try {
+			System.out.println(e.getSource());
+			if( e.getSource().equals(mach1) ) {
+
+			}
+			
+			else if( e.getSource().equals(mach2) ) {
+				
+			}			
+			else if( e.getSource().equals(mach3) ) {
+				
+			}
+			else if( e.getSource().equals(mach4) ) {
+				
+			}
+			else {
+				System.out.println("Well fuck.");
+			}
+		}
+		catch(Exception exception) {
+			System.err.println("JavaClient: " + exception);
+		}
+		
+	}
+	
 	
 	JButton mach1 = new JButton("Machine 1"); 
 	JButton mach2 = new JButton("Machine 2"); 
@@ -30,10 +58,10 @@ public class HQGUI extends JFrame {
 		panel.add(mach3); 
 		panel.add(mach4);
 		
-		//mach1.addActionListener(this); 
-		//mach2.addActionListener(this); 
-		//mach3.addActionListener(this); 
-		//mach4.addActionListener(this);
+		mach1.addActionListener(this); 
+		mach2.addActionListener(this); 
+		mach3.addActionListener(this); 
+		mach4.addActionListener(this);
 		
 		
 		
@@ -47,14 +75,6 @@ public class HQGUI extends JFrame {
 	public static void main(String [] args ) { 
 		HQGUI myGUI = new HQGUI(); 
 		myGUI.setVisible(true); 
-		try {
-			   System.out.println("Starting the Recycling HQ Server..."); 
-			   WebServer server = new WebServer(80);
-			   server.addHandler("recycling", myGUI);
-			   server.start();
-			  } catch (Exception exception) {
-			   System.err.println("JavaServer: " + exception);
-			   }
 	}
 
 }

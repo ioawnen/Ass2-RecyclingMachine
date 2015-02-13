@@ -26,10 +26,11 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	 */
 	private static final long serialVersionUID = -5772727482959492839L;
 	private String sessionCookie = ""; 
+	private String serverUrl = "http://localhost:3133/RPC2";
 	
 	public void actionPerformed(ActionEvent e) {
 		try { 
-			XmlRpcClient server = new XmlRpcClient("http://localhost:3133/RPC2"); //We will be sticking with port 3133
+			XmlRpcClient server = new XmlRpcClient(serverUrl); //We will be sticking with port 3133
 			if( e.getSource().equals(login) ) { 
 				String message; 
 
