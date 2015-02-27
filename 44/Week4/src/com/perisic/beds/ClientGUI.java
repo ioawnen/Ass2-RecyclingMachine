@@ -112,6 +112,82 @@ public class ClientGUI extends JFrame implements ActionListener  {
 				}
 				
 			}
+			else if( e.getSource().equals(slot1)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				params.add(1);
+				Object result = server.execute("recycling.testButton", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} 
+				else if( resultString == "Y" ) { 
+					System.out.println("Action Complete"); 
+				} 
+				else if( resultString == "N" ) { 
+					System.out.println("Invalid Action"); 
+				}
+				else { 
+					System.err.println("This should never happen");
+				}
+			}
+			else if( e.getSource().equals(slot2)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				params.add(2);
+				Object result = server.execute("recycling.testButton", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} 
+				else if( resultString == "Y" ) { 
+					System.out.println("Action Complete"); 
+				} 
+				else if( resultString == "N" ) { 
+					System.out.println("Invalid Action"); 
+				}
+				else { 
+					System.err.println("This should never happen");
+				}
+			}
+			else if( e.getSource().equals(slot3)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				params.add(3);
+				Object result = server.execute("recycling.testButton", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} 
+				else if( resultString == "Y" ) { 
+					System.out.println("Action Complete"); 
+				} 
+				else if( resultString == "N" ) { 
+					System.out.println("Invalid Action"); 
+				}
+				else { 
+					System.err.println("This should never happen");
+				}
+			}
+			else if( e.getSource().equals(slot4)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				params.add(4);
+				Object result = server.execute("recycling.testButton", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} 
+				else if( resultString == "Y" ) { 
+					System.out.println("Action Complete"); 
+				} 
+				else if( resultString == "N" ) { 
+					System.out.println("Invalid Action"); 
+				}
+				else { 
+					System.err.println("This should never happen");
+				}
+			}
 			else if( e.getSource().equals(logout)) { 
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
@@ -128,6 +204,10 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	JButton receipt = new JButton("View Receipt");
 	JButton summary = new JButton("View Summary");
 	JButton feedback = new JButton ("View Feedback");
+	JButton slot1 = new JButton ("Test Slot 1");
+	JButton slot2 = new JButton ("Test Slot 2");
+	JButton slot3 = new JButton ("Test Slot 3");
+	JButton slot4 = new JButton ("Test Slot 4");
 	JButton logout = new JButton("Logout"); 
 	
 	
@@ -135,7 +215,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		super();
 		
 		serverUrl = inputIP;
-		setSize(200, 300);
+		setSize(300, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		
 		//Layout Settings
@@ -158,7 +238,16 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		c.gridy = 4;
 		panel.add(feedback, c);
 		c.gridy = 5;
-		
+		c.gridx = 1;
+		c.gridy = 0;
+		panel.add(slot1, c);
+		c.gridy = 1;
+		panel.add(slot2, c);
+		c.gridy = 2;
+		panel.add(slot3, c);
+		c.gridy = 3;
+		panel.add(slot4, c);
+		c.gridy = 4;
 		panel.add(logout, c);
 		
 		login.addActionListener(this); 
@@ -166,6 +255,10 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		receipt.addActionListener(this);
 		summary.addActionListener(this);
 		feedback.addActionListener(this); 
+		slot1.addActionListener(this);
+		slot2.addActionListener(this);
+		slot3.addActionListener(this);
+		slot4.addActionListener(this);
 		logout.addActionListener(this); 
 
 		
@@ -177,11 +270,11 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	public boolean startGUI(String inputIP) {
 		
 		try {
-			ClientGUI mainGui = new ClientGUI(inputIP); 
-			mainGui.setVisible(true); 
-			
 			Display displayGui = new Display();
 			displayGui.setVisible(true);
+			
+			ClientGUI mainGui = new ClientGUI(inputIP); 
+			mainGui.setVisible(true); 
 				
 			return true;
 		}
@@ -193,9 +286,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	public static void main(String [] args ) { 
 		ClientGUI myGUI = new ClientGUI(""); 
-		myGUI.setVisible(true); 
-		System.err.println("reohjrteiohjroeijhierjhietjh");
-		
+		myGUI.setVisible(true); 		
 	}
 
 }

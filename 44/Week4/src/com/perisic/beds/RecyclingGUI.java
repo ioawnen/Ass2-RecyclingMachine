@@ -312,6 +312,35 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 			return "-1";
 		}
 	}
+	public String testButton(String myCookie, int butNum) {
+		if ( storedCookie == null) {
+			return "-1";
+		} else if ( myCookie.equals(storedCookie)) {
+			//things
+			if (butNum==1) {
+				slot1.doClick();
+				return "Y";
+			}
+			else if (butNum==2) {
+				slot2.doClick();
+				return "Y";
+			}
+			else if (butNum==3) {
+				slot3.doClick();
+				return "Y";
+			}
+			else if (butNum==4) {
+				slot4.doClick();
+				return "Y";
+			}
+			else {
+				return "N";
+			}
+		}
+		else {
+			return "-1";
+		}
+	}
 	
 }
 

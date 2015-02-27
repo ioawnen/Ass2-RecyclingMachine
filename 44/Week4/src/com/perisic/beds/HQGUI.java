@@ -24,7 +24,7 @@ public class HQGUI extends JFrame implements ActionListener {
 				clientgui.startGUI("http://10.1.27.192:31331/RPC2");
 			}			
 			else if( e.getSource().equals(mach3) ) {
-				clientgui.startGUI("Cabbage");
+				clientgui.startGUI("http://10.1.27.146:3133/RPC2");
 			}
 			else if( e.getSource().equals(mach4) ) {
 				clientgui.startGUI("Cabbage");
@@ -43,11 +43,11 @@ public class HQGUI extends JFrame implements ActionListener {
 		
 	}
 	
-	JLabel title = new JLabel("Login");
-	JButton mach1 = new JButton("Machine 1"); 
-	JButton mach2 = new JButton("Machine 2"); 
-	JButton mach3 = new JButton("Machine 3"); 
-	JButton mach4 = new JButton("Machine 4");
+	JLabel title = new JLabel("Login",SwingConstants.CENTER);
+	JButton mach1 = new JButton("Machine 1 - Luton"); 
+	JButton mach2 = new JButton("Machine 2 - Bedford"); 
+	JButton mach3 = new JButton("Machine 3 - Harpenden"); 
+	JButton mach4 = new JButton("Machine 4 - St. Albans");
 	JTextField inputField = new JTextField(50);
 	JButton inputMach = new JButton("Connect");
 
@@ -61,9 +61,10 @@ public class HQGUI extends JFrame implements ActionListener {
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.5;
 		c.weighty = 0.5;
-		c.insets = new Insets(5,5,5,0);
+		c.insets = new Insets(5,5,5,5);
 		c.gridx = 0;
 		c.gridy = 0;	
+		c.fill = GridBagConstraints.HORIZONTAL;
 		panel.add(title, c);
 		c.gridy = 1;
 		panel.add(mach1, c);
