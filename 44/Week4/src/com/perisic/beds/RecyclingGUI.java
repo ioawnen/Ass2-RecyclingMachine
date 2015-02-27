@@ -1,10 +1,16 @@
 package com.perisic.beds;
 //import GreenDisplay;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import com.perisic.beds.CustomerPanel;
+
 import javax.swing.*;
+
 import org.apache.xmlrpc.WebServer;
 /**
  * A Simple Graphical User Interface for the Recycling Machine.
@@ -25,7 +31,6 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	private String storedCookie = null; // some random string to be used for authentication
 
 	CustomerPanel myCustomerPanel = new CustomerPanel( new Display());  //display window constructed
-	JLabel status = new JLabel(); //status 
 
 	
 	/**
@@ -97,6 +102,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	JButton summary = new JButton("Summary");
 	JButton receipt = new JButton("Receipt"); 
 	JButton feedback = new JButton("Feedback");
+	JLabel status = new JLabel(" ",SwingConstants.CENTER); //status 
 	
 	int capacity = 15;
 	/**
@@ -105,29 +111,48 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	public RecyclingGUI() {
 		super();
 		setTitle("Recycling Machine");
-		setSize(400, 150);
+		setSize(400, 250);
 		setLocation(500,450);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		JPanel panel = new JPanel(); 
-		panel.add(slot1); 
-		panel.add(slot2);
-		panel.add(slot3); 
-		panel.add(slot4);
-
+		JPanel panel = new JPanel(new GridBagLayout()); 
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.insets = new Insets(5,5,5,5);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		c.gridx = 0;
+		c.gridy = 0;	
+		panel.add(slot1,c); 
+		c.gridy = 1;
+		panel.add(slot2,c);
+		c.gridy = 2;
+		panel.add(slot3,c);
+		c.gridy = 3;
+		panel.add(slot4,c);
+ 		
+		c.gridx = 1;
+		c.gridy = 0;
+		panel.add(receipt,c); 
+		c.gridy = 1;
+		panel.add(printer,c);
+		c.gridy = 2;
+		panel.add(summary,c);
+		c.gridy = 3;
+		panel.add(feedback,c);
+		
+		c.gridx = 0;
+		c.gridy = 5;
+		c.gridwidth = 2;
+		panel.add(status,c);
+		
 		slot1.addActionListener(this); 
 		slot2.addActionListener(this); 
 		slot3.addActionListener(this); 
 		slot4.addActionListener(this);
-		
-		panel.add(receipt); 
 		receipt.addActionListener(this); 
 		printer.addActionListener(this);
-		panel.add(printer);
 		summary.addActionListener(this);
-		panel.add(summary);
-		panel.add(status);
-		
-		panel.add(feedback);
 		feedback.addActionListener(this);
 		
 		
