@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.perisic.beds.CustomerPanel;
 
@@ -29,6 +31,8 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	private static final long serialVersionUID = -8505887234678184162L; //id required
 	private String storedPasswd = "password"; // needs some thinking with encryption etc
 	private String storedCookie = null; // some random string to be used for authentication
+	private ArrayList<String> feedbackList = new ArrayList<String>();
+	
 
 	CustomerPanel myCustomerPanel = new CustomerPanel( new Display());  //display window constructed
 
@@ -86,8 +90,12 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 			status.setText("");
 		} else if (e.getSource().equals(feedback)) {
 			System.err.println("Feeback Button pressed");
-					
-			feedbackPane.startGUI();		
+
+			JFrame frame = new JFrame("Feedback");
+		    // open prompt for feedback
+		    String input = JOptionPane.showInputDialog(frame, "Leave Feedback");
+
+		    if(input!=null){ feedbackList.add(input); }
 		}
 		
 	}
@@ -241,8 +249,22 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		green = false; //if it is currently green, the text is set to pink
 		printer.setText("Change to Green Display");
 		myCustomerPanel.changeColour("PINK");
+		}
 	}
+	
+	public String getFeedbackText() {
+		
+		String feedbackString = null;
+				
+		for(int i = 0; i<feedbackList.size(); i++) {
+			feedbackString += feedbackList.get(i)+"\n";
+		}
+		
+		System.out.println(feedbackString);
+		return feedbackString;
 	}
+	
+	
 	public int numberOfItems(String myCookie) {
 		if( storedCookie == null ) { 
 			return -1; 
@@ -279,7 +301,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		if ( storedCookie == null) {
 			return "-1";
 		} else if ( myCookie.equals(storedCookie)) {
-			return null;
+			return getFeedbackText();
 		}
 		else {
 			return "-1";
