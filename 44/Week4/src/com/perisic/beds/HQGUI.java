@@ -21,19 +21,19 @@ public class HQGUI extends JFrame implements ActionListener {
 				clientgui.startGUI("http://localhost:3133/RPC2");
 			}	
 			else if( e.getSource().equals(mach2) ) {
-				clientgui.startGUI("http://10.1.27.192:31331/RPC2");
+				clientgui.startGUI("http://10.1.27.192:3132/RPC2");
 			}			
 			else if( e.getSource().equals(mach3) ) {
 				clientgui.startGUI("http://10.1.27.146:3133/RPC2");
 			}
 			else if( e.getSource().equals(mach4) ) {
-				clientgui.startGUI("Cabbage");
+				clientgui.startGUI("http://10.104.20.77:3133/RPC2");
 			}
 			else if( e.getSource().equals(inputMach) ) {
 				clientgui.startGUI(inputField.getText());
 			}
 			else {
-				System.out.println("Well fuck.");
+				System.out.println("Well");
 				clientgui.dispose();
 			}
 		}

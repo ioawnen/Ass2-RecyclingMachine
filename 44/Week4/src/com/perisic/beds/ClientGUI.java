@@ -18,9 +18,6 @@ import com.perisic.beds.CustomerPanel;
 
 
 /**
- * A Simple Graphical User Interface for the Client in the HQ.
- * @author Marc Conrad
- *
  */
 public class ClientGUI extends JFrame implements ActionListener  {
 	
@@ -46,10 +43,10 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					Object result3 = server.execute("recycling.login", parms1); 
 					String loginRequest = result3.toString(); 
 					if(loginRequest.equals("wrong password")) { 
-						System.out.println("Wrong Pasword. Try again!!!"); 
+						System.out.println("Wrong Pasword"); 
 					} else { 
 						sessionCookie = loginRequest; 
-						System.out.println("Well done you made it! Correct password!");
+						System.out.println("Login Successful");
 						loginSuccess = true; 
 					}
 				}
@@ -75,12 +72,12 @@ public class ClientGUI extends JFrame implements ActionListener  {
 			else if( e.getSource().equals(receipt)) { 
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
-				Object result = server.execute("recycling.summaryText", params ); 
+				Object result = server.execute("recycling.receiptText", params ); 
 				String resultString = new String(result.toString()); 
 				if( resultString == "-1" ) { 
 					System.out.println("Sorry no authentication there."); 
 				} else { 
-					System.out.println("This is the summary statement: "+resultString);
+					System.out.println("This is the receipt: "+resultString);
 					displayGui.print(resultString);
 				}
 			}
@@ -128,7 +125,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Invalid Action"); 
 				}
 				else { 
-					System.err.println("This should never happen");
+					System.err.println("Success");
 				}
 			}
 			else if( e.getSource().equals(slot2)) { 
@@ -147,7 +144,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Invalid Action"); 
 				}
 				else { 
-					System.err.println("This should never happen");
+					System.err.println("Success");
 				}
 			}
 			else if( e.getSource().equals(slot3)) { 
@@ -166,7 +163,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Invalid Action"); 
 				}
 				else { 
-					System.err.println("This should never happen");
+					System.err.println("Success");
 				}
 			}
 			else if( e.getSource().equals(slot4)) { 
@@ -185,7 +182,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					System.out.println("Invalid Action"); 
 				}
 				else { 
-					System.err.println("This should never happen");
+					System.err.println("Success");
 				}
 			}
 			else if( e.getSource().equals(logout)) { 
