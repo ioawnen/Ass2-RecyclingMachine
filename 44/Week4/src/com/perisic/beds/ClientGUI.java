@@ -29,11 +29,12 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	 */
 	private static final long serialVersionUID = -5772727482959492839L;
 	private String sessionCookie = ""; 
-	private String serverUrl = "http://localhost:3133/RPC2";
+	private String serverUrl = "";
 	private Display displayGui = new Display();
 	
 	public void actionPerformed(ActionEvent e) {
 		try { 
+			//System.out.println(serverUrl);
 			XmlRpcClient server = new XmlRpcClient(serverUrl); //We will be sticking with port 3133
 			if( e.getSource().equals(login) ) { 
 				String message; 
@@ -130,8 +131,10 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	JButton logout = new JButton("Logout"); 
 	
 	
-	public ClientGUI() {
+	public ClientGUI(String inputIP) {
 		super();
+		
+		serverUrl = inputIP;
 		setSize(200, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		
@@ -174,8 +177,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	public boolean startGUI(String inputIP) {
 		
 		try {
-			serverUrl = inputIP;
-			ClientGUI mainGui = new ClientGUI(); 
+			ClientGUI mainGui = new ClientGUI(inputIP); 
 			mainGui.setVisible(true); 
 			
 			Display displayGui = new Display();
@@ -190,8 +192,9 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	}
 	
 	public static void main(String [] args ) { 
-	ClientGUI myGUI = new ClientGUI(); 
+		ClientGUI myGUI = new ClientGUI(""); 
 		myGUI.setVisible(true); 
+		System.err.println("reohjrteiohjroeijhierjhietjh");
 		
 	}
 

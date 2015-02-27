@@ -14,14 +14,14 @@ public class HQGUI extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		ClientGUI clientgui = new ClientGUI();
+		ClientGUI clientgui = new ClientGUI("");
 		try {
 			System.out.println(e.getSource());
 			if( e.getSource().equals(mach1) ) {
 				clientgui.startGUI("http://localhost:3133/RPC2");
 			}	
 			else if( e.getSource().equals(mach2) ) {
-				clientgui.startGUI("Cabbage");
+				clientgui.startGUI("http://10.1.27.192:31331/RPC2");
 			}			
 			else if( e.getSource().equals(mach3) ) {
 				clientgui.startGUI("Cabbage");
