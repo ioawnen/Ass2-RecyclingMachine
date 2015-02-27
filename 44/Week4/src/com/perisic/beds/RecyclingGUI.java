@@ -254,7 +254,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	
 	public String getFeedbackText() {
 		
-		String feedbackString = null;
+		String feedbackString = "";
 				
 		for(int i = 0; i<feedbackList.size(); i++) {
 			feedbackString += feedbackList.get(i)+"\n";
@@ -301,7 +301,12 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		if ( storedCookie == null) {
 			return "-1";
 		} else if ( myCookie.equals(storedCookie)) {
-			return getFeedbackText();
+			if (getFeedbackText()!=null) {
+				return getFeedbackText();
+			}
+			else {
+				return "-2";
+			}
 		}
 		else {
 			return "-1";

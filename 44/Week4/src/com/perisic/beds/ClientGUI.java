@@ -95,6 +95,22 @@ public class ClientGUI extends JFrame implements ActionListener  {
 					displayGui.print(resultString);
 				}
 			}
+			else if( e.getSource().equals(feedback)) { 
+				Vector params = new Vector(); 
+				params.add(sessionCookie); 
+				Object result = server.execute("recycling.feedbackText", params ); 
+				String resultString = new String(result.toString()); 
+				if( resultString == "-1" ) { 
+					System.out.println("Sorry no authentication there."); 
+				} else if (resultString == "-2"){
+					System.out.println("No feedback available.");
+				}
+				else { 
+					System.out.println("Current customer feedback: \n"+resultString);
+					displayGui.print(resultString);
+				}
+				
+			}
 			else if( e.getSource().equals(logout)) { 
 				Vector params = new Vector(); 
 				params.add(sessionCookie); 
@@ -110,6 +126,7 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	JButton numberOfItems = new JButton("No. of Items"); 
 	JButton receipt = new JButton("View Receipt");
 	JButton summary = new JButton("View Summary");
+	JButton feedback = new JButton ("View Feedback");
 	JButton logout = new JButton("Logout"); 
 	
 	
@@ -136,12 +153,16 @@ public class ClientGUI extends JFrame implements ActionListener  {
 		c.gridy = 3;
 		panel.add(summary, c);
 		c.gridy = 4;
+		panel.add(feedback, c);
+		c.gridy = 5;
+		
 		panel.add(logout, c);
 		
 		login.addActionListener(this); 
 		numberOfItems.addActionListener(this); 
 		receipt.addActionListener(this);
 		summary.addActionListener(this);
+		feedback.addActionListener(this); 
 		logout.addActionListener(this); 
 
 		
