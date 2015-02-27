@@ -1,7 +1,10 @@
 package com.perisic.beds;
 
 
-
+import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -112,14 +115,28 @@ public class ClientGUI extends JFrame implements ActionListener  {
 	
 	public ClientGUI() {
 		super();
-		setSize(400, 100);
+		setSize(200, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		JPanel panel = new JPanel(); 
-		panel.add(login); 
-		panel.add(numberOfItems);
-		panel.add(receipt);
-		panel.add(summary);
-		panel.add(logout); 
+		
+		//Layout Settings
+		JPanel panel = new JPanel(new GridBagLayout()); 
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.insets = new Insets(5,5,5,5);
+		c.gridx = 0;
+		c.gridy = 0;	
+		c.fill = GridBagConstraints.HORIZONTAL;
+		panel.add(login, c);
+		c.gridy = 1;
+		panel.add(numberOfItems, c);
+		c.gridy = 2;
+		panel.add(receipt, c);
+		c.gridy = 3;
+		panel.add(summary, c);
+		c.gridy = 4;
+		panel.add(logout, c);
 		
 		login.addActionListener(this); 
 		numberOfItems.addActionListener(this); 
