@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.perisic.beds.CustomerPanel;
 import javax.swing.*;
-
 import org.apache.xmlrpc.WebServer;
 /**
  * A Simple Graphical User Interface for the Recycling Machine.
@@ -14,6 +13,9 @@ import org.apache.xmlrpc.WebServer;
  *
  */
 public class RecyclingGUI extends JFrame implements ActionListener  {
+	
+	
+	FeedbackPane feedbackPane = new FeedbackPane();
 	
 	public static boolean green = false; //initially text is pink, not green
 	public static WebServer server = null;
@@ -24,6 +26,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 
 	CustomerPanel myCustomerPanel = new CustomerPanel( new Display());  //display window constructed
 	JLabel status = new JLabel(); //status 
+
 	
 	/**
 	 * Defines what happens when a button is pressed.
@@ -76,7 +79,12 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		} else if (e.getSource().equals(summary)) { //summary is output when this button is pressed
 			myCustomerPanel.printSummary();
 			status.setText("");
+		} else if (e.getSource().equals(feedback)) {
+			System.err.println("Feeback Button pressed");
+					
+			feedbackPane.startGUI();		
 		}
+		
 	}
 	/*
 	 * Declaration of GUI elements
@@ -88,6 +96,7 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 	JButton printer = new JButton("Change to Green Display");
 	JButton summary = new JButton("Summary");
 	JButton receipt = new JButton("Receipt"); 
+	JButton feedback = new JButton("Feedback");
 	
 	int capacity = 15;
 	/**
@@ -117,6 +126,9 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		summary.addActionListener(this);
 		panel.add(summary);
 		panel.add(status);
+		
+		panel.add(feedback);
+		feedback.addActionListener(this);
 		
 		
 		
@@ -238,7 +250,16 @@ public class RecyclingGUI extends JFrame implements ActionListener  {
 		}
 
 		 }
-	
+	public String feedbackText(String myCookie) {
+		if ( storedCookie == null) {
+			return "-1";
+		} else if ( myCookie.equals(storedCookie)) {
+			return null;
+		}
+		else {
+			return "-1";
+		}
+	}
 	
 }
 
