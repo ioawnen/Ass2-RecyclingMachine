@@ -1,6 +1,3 @@
 # Ass2-RecyclingMachine
 
-Beep boop.
-
-
-This is a test.
+XML-RPC Implementation of the Recycling Machine assignment.
